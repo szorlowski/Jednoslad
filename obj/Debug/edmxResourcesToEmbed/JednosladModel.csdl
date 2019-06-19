@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="jednosladModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="klienci">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="haslo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="transakcjes" Relationship="Self.FK__transakcj__id_kl__5441852A" FromRole="klienci" ToRole="transakcje" />
+  </EntityType>
+  <EntityType Name="motocykle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="marka" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="rok_produkcji" Type="DateTime" Precision="0" />
+    <Property Name="pojemnosc" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="cena" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="transakcjes" Relationship="Self.FK__transakcj__id_mo__5535A963" FromRole="motocykle" ToRole="transakcje" />
+  </EntityType>
+  <EntityType Name="transakcje">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_klienta" Type="Int32" />
+    <Property Name="id_motocykla" Type="Int32" />
+    <Property Name="data_wypo" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="klienci" Relationship="Self.FK__transakcj__id_kl__5441852A" FromRole="transakcje" ToRole="klienci" />
+    <NavigationProperty Name="motocykle" Relationship="Self.FK__transakcj__id_mo__5535A963" FromRole="transakcje" ToRole="motocykle" />
+  </EntityType>
+  <Association Name="FK__transakcj__id_kl__5441852A">
+    <End Role="klienci" Type="Self.klienci" Multiplicity="0..1" />
+    <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="klienci">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transakcje">
+        <PropertyRef Name="id_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transakcj__id_mo__5535A963">
+    <End Role="motocykle" Type="Self.motocykle" Multiplicity="0..1" />
+    <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="motocykle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transakcje">
+        <PropertyRef Name="id_motocykla" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="jednosladEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="kliencis" EntityType="Self.klienci" />
+    <EntitySet Name="motocykles" EntityType="Self.motocykle" />
+    <EntitySet Name="transakcjes" EntityType="Self.transakcje" />
+    <AssociationSet Name="FK__transakcj__id_kl__5441852A" Association="Self.FK__transakcj__id_kl__5441852A">
+      <End Role="klienci" EntitySet="kliencis" />
+      <End Role="transakcje" EntitySet="transakcjes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transakcj__id_mo__5535A963" Association="Self.FK__transakcj__id_mo__5535A963">
+      <End Role="motocykle" EntitySet="motocykles" />
+      <End Role="transakcje" EntitySet="transakcjes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

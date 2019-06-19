@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="jednosladModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="20" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="20" />
+          <Property Name="login" Type="varchar" MaxLength="20" />
+          <Property Name="haslo" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="motocykle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="marka" Type="varchar" MaxLength="30" />
+          <Property Name="rok_produkcji" Type="date" />
+          <Property Name="pojemnosc" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="cena" Type="money" />
+        </EntityType>
+        <EntityType Name="transakcje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_klienta" Type="int" />
+          <Property Name="id_motocykla" Type="int" />
+          <Property Name="data_wypo" Type="date" />
+        </EntityType>
+        <Association Name="FK__transakcj__id_kl__5441852A">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="0..1" />
+          <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transakcje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transakcj__id_mo__5535A963">
+          <End Role="motocykle" Type="Self.motocykle" Multiplicity="0..1" />
+          <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motocykle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transakcje">
+              <PropertyRef Name="id_motocykla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jednosladModelStoreContainer">
+          <EntitySet Name="klienci" EntityType="Self.klienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="motocykle" EntityType="Self.motocykle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="transakcje" EntityType="Self.transakcje" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__transakcj__id_kl__5441852A" Association="Self.FK__transakcj__id_kl__5441852A">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="transakcje" EntitySet="transakcje" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transakcj__id_mo__5535A963" Association="Self.FK__transakcj__id_mo__5535A963">
+            <End Role="motocykle" EntitySet="motocykle" />
+            <End Role="transakcje" EntitySet="transakcje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="jednosladModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="haslo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="transakcjes" Relationship="Self.FK__transakcj__id_kl__5441852A" FromRole="klienci" ToRole="transakcje" />
+        </EntityType>
+        <EntityType Name="motocykle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="marka" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="rok_produkcji" Type="DateTime" Precision="0" />
+          <Property Name="pojemnosc" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cena" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="transakcjes" Relationship="Self.FK__transakcj__id_mo__5535A963" FromRole="motocykle" ToRole="transakcje" />
+        </EntityType>
+        <EntityType Name="transakcje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_klienta" Type="Int32" />
+          <Property Name="id_motocykla" Type="Int32" />
+          <Property Name="data_wypo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="klienci" Relationship="Self.FK__transakcj__id_kl__5441852A" FromRole="transakcje" ToRole="klienci" />
+          <NavigationProperty Name="motocykle" Relationship="Self.FK__transakcj__id_mo__5535A963" FromRole="transakcje" ToRole="motocykle" />
+        </EntityType>
+        <Association Name="FK__transakcj__id_kl__5441852A">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="0..1" />
+          <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transakcje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__transakcj__id_mo__5535A963">
+          <End Role="motocykle" Type="Self.motocykle" Multiplicity="0..1" />
+          <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="motocykle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="transakcje">
+              <PropertyRef Name="id_motocykla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jednosladEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kliencis" EntityType="Self.klienci" />
+          <EntitySet Name="motocykles" EntityType="Self.motocykle" />
+          <EntitySet Name="transakcjes" EntityType="Self.transakcje" />
+          <AssociationSet Name="FK__transakcj__id_kl__5441852A" Association="Self.FK__transakcj__id_kl__5441852A">
+            <End Role="klienci" EntitySet="kliencis" />
+            <End Role="transakcje" EntitySet="transakcjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__transakcj__id_mo__5535A963" Association="Self.FK__transakcj__id_mo__5535A963">
+            <End Role="motocykle" EntitySet="motocykles" />
+            <End Role="transakcje" EntitySet="transakcjes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="jednosladModelStoreContainer" CdmEntityContainer="jednosladEntities">
+          <EntitySetMapping Name="kliencis">
+            <EntityTypeMapping TypeName="jednosladModel.klienci">
+              <MappingFragment StoreEntitySet="klienci">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="motocykles">
+            <EntityTypeMapping TypeName="jednosladModel.motocykle">
+              <MappingFragment StoreEntitySet="motocykle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="rok_produkcji" ColumnName="rok_produkcji" />
+                <ScalarProperty Name="pojemnosc" ColumnName="pojemnosc" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="transakcjes">
+            <EntityTypeMapping TypeName="jednosladModel.transakcje">
+              <MappingFragment StoreEntitySet="transakcje">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="id_motocykla" ColumnName="id_motocykla" />
+                <ScalarProperty Name="data_wypo" ColumnName="data_wypo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

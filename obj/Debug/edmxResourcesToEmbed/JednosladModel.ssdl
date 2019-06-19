@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="jednosladModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="klienci">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imie" Type="varchar" MaxLength="20" />
+    <Property Name="nazwisko" Type="varchar" MaxLength="20" />
+    <Property Name="login" Type="varchar" MaxLength="20" />
+    <Property Name="haslo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="motocykle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="marka" Type="varchar" MaxLength="30" />
+    <Property Name="rok_produkcji" Type="date" />
+    <Property Name="pojemnosc" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="cena" Type="money" />
+  </EntityType>
+  <EntityType Name="transakcje">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_klienta" Type="int" />
+    <Property Name="id_motocykla" Type="int" />
+    <Property Name="data_wypo" Type="date" />
+  </EntityType>
+  <Association Name="FK__transakcj__id_kl__5441852A">
+    <End Role="klienci" Type="Self.klienci" Multiplicity="0..1" />
+    <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="klienci">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transakcje">
+        <PropertyRef Name="id_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transakcj__id_mo__5535A963">
+    <End Role="motocykle" Type="Self.motocykle" Multiplicity="0..1" />
+    <End Role="transakcje" Type="Self.transakcje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="motocykle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transakcje">
+        <PropertyRef Name="id_motocykla" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="jednosladModelStoreContainer">
+    <EntitySet Name="klienci" EntityType="Self.klienci" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="motocykle" EntityType="Self.motocykle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="transakcje" EntityType="Self.transakcje" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__transakcj__id_kl__5441852A" Association="Self.FK__transakcj__id_kl__5441852A">
+      <End Role="klienci" EntitySet="klienci" />
+      <End Role="transakcje" EntitySet="transakcje" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transakcj__id_mo__5535A963" Association="Self.FK__transakcj__id_mo__5535A963">
+      <End Role="motocykle" EntitySet="motocykle" />
+      <End Role="transakcje" EntitySet="transakcje" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

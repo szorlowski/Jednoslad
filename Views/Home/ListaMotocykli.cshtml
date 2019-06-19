@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "ListaMotocykli";
+}
+
+<style>
+    .motocykl{
+        background-color: darkgoldenrod;
+    }
+    .motocykle {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-column-gap: 5px;
+        grid-row-gap: 50px
+    }
+</style>
+
+<h2>ListaMotocykli</h2>
+<div>
+
+    <form asp-action="ListaMotocykli" asp-controller="HomeController" method="post">
+        <h4>Marka</h4>
+        <input id="marka" name="marka" type="text" /><br />
+        <h4>Pojemnosc</h4>
+        <input id="pojemnosc" name="pojemnosc" type="text" /><br />
+        all?
+        <input checked="checked" id="all" name="all" type="checkbox" value="true" />
+        <input value="Szukaj" type="Submit" name="command"/>
+    </form>
+
+    <br /><br /><br /><br />
+
+    <div class="motocykle">
+
+        @foreach (var motocykl in ViewBag.Motocykle)
+        {
+            <div class="motocykl">
+                Motocykl<br />
+                Marka: @motocykl.marka<br />
+                Rok Produkcji: @motocykl.rok_produkcji<br />
+                Pojemnosc: @motocykl.pojemnosc<br />
+                Cena: @motocykl.cena
+                <form asp-action="Zakup" asp-controller="HomeController" method="post">
+                    <input value=@motocykl.id id="idMotocykla" name="idMotocykla" type="hidden" />
+                    <input value="Kup" type="submit" name="command"/>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
