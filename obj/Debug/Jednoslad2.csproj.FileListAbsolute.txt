@@ -85,3 +85,7 @@ C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\obj\Debug\Jednoslad2.csproj.
 C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\obj\Debug\Jednoslad2.csproj.CopyComplete
 C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\obj\Debug\Jednoslad2.dll
 C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\obj\Debug\Jednoslad2.pdb
+C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\bin\EntityFramework.dll
+C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\bin\EntityFramework.SqlServer.dll
+C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\bin\EntityFramework.xml
+C:\Users\Szymson\source\repos\Jednoslad2\Jednoslad2\bin\EntityFramework.SqlServer.xml

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="jednosladModelStoreContainer" CdmEntityContainer="jednosladEntities">
+    <EntitySetMapping Name="kliencis">
+      <EntityTypeMapping TypeName="jednosladModel.klienci">
+        <MappingFragment StoreEntitySet="klienci">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="haslo" ColumnName="haslo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="motocykles">
+      <EntityTypeMapping TypeName="jednosladModel.motocykle">
+        <MappingFragment StoreEntitySet="motocykle">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="marka" ColumnName="marka" />
+          <ScalarProperty Name="rok_produkcji" ColumnName="rok_produkcji" />
+          <ScalarProperty Name="pojemnosc" ColumnName="pojemnosc" />
+          <ScalarProperty Name="cena" ColumnName="cena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transakcjes">
+      <EntityTypeMapping TypeName="jednosladModel.transakcje">
+        <MappingFragment StoreEntitySet="transakcje">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+          <ScalarProperty Name="id_motocykla" ColumnName="id_motocykla" />
+          <ScalarProperty Name="data_wypo" ColumnName="data_wypo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

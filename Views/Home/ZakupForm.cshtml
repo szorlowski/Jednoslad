@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "ZakupForm";
+}
+
+<style>
+    .motocykl {
+        background-color: darkgoldenrod;
+    }
+
+    .motocykle {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-column-gap: 5px;
+        grid-row-gap: 50px
+    }
+</style>
+
+<h2>ZakupForm</h2>
+<form asp-action="ZakupForm" asp-controller="HomeController" method="post">
+    Hej @ViewBag.klient.imie zamierzasz kupic ponizszy motocykl.
+    <div class="motocykl">
+        Motocykl<br />
+        Id: @ViewBag.motocykl.id<br />
+        Marka: @ViewBag.motocykl.marka<br />
+        Rok Produkcji: @ViewBag.motocykl.rok_produkcji<br />
+        Pojemnosc: @ViewBag.motocykl.pojemnosc<br />
+        Cena: @ViewBag.motocykl.cena
+    </div>
+
+    <input name="idKlienta" type="hidden" value="@ViewBag.klient.id"/>
+    <input name="idMotocykla" type="hidden" value="@ViewBag.motocykl.id" />
+    <input value="Potwierdz" type="Submit" />
+</form>
+

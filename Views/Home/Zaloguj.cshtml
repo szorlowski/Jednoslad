@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Zaloguj";
+}
+
+<h2>Zaloguj</h2>
+
+<form asp-action="rejestracja" asp-controller="HomeController" method="post">
+    <h3>Login</h3>
+    <input id="login" name="login" type="text" /><br />
+    <h3>Haslo</h3>
+    <input id="haslo" name="haslo" type="text" /><br />
+    <input value="Login" type="Submit" />
+</form>
+

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Transakcje";
+}
+
+<style>
+    .transakcja {
+        background-color: darkgoldenrod;
+    }
+
+    .transakcje {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-column-gap: 5px;
+        grid-row-gap: 50px
+    }
+</style>
+
+<h2>Transakcje</h2>
+<h3>Witaj @ViewBag.klient.imie oto twoje kupione motocykle:</h3>
+
+<div class="transakcje">
+
+    @foreach (var t in ViewBag.transakcje)
+    {
+        <div class="transakcja">
+            Transakcja<br />
+            IdMotocykla: @t.id_motocykla<br />
+            Data: @t.data_wypo<br />
+        </div>
+    }
+</div>
+
